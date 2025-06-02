@@ -1,11 +1,13 @@
-# Use official PHP Apache image
 FROM php:8.3-apache
 
-# Copy everything to the web root
+# Copy all files
 COPY . /var/www/html/
 
 # Set working directory
 WORKDIR /var/www/html/
 
-# Optional: install PHP extensions (none required for this app)
+# Install any PHP extensions (if needed)
 RUN docker-php-ext-install mysqli
+
+# Set the default command for background worker
+CMD ["php", "cron.php"]
