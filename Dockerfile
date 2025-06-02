@@ -10,4 +10,4 @@ WORKDIR /var/www/html/
 RUN docker-php-ext-install mysqli
 
 # Set the default command for background worker
-CMD ["php", "cron.php"]
+#CMD ["php", "cron.php"]
