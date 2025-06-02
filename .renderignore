@@ -1,0 +1,7 @@
+# Don't deploy these to Render
+.gitignore
+README.md
+Dockerfile
+setup_cron.sh
+*.log
+*.md

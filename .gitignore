@@ -1,0 +1,23 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignore IDE settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore logs
+*.log
+
+# Ignore sensitive or generated files
+/codes/
+/registered_emails.txt
+
+# Ignore cron logs if any
+cron.log
+
+# Ignore node_modules just in case
+node_modules/
