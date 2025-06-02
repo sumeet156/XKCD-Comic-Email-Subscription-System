@@ -16,10 +16,14 @@ function log_message($message) {
     file_put_contents(LOG_FILE, $log_entry, FILE_APPEND);
 }
 
-// ✅ Gmail SMTP configuration
+// ✅ Gmail SMTP configuration using Render environment variables
 define('SMTP_HOST', 'smtp.gmail.com');
 define('SMTP_PORT', 587);
-define('SMTP_USERNAME', 'homeassist021@gmail.com');
-define('SMTP_PASSWORD', 'zhcysegowpinczwz'); // App password, not Gmail login
+
+// These values will be read from Render → Environment tab
+define('SMTP_USERNAME', getenv('SMTP_USERNAME')); // e.g. homeassist021@gmail.com
+define('SMTP_PASSWORD', getenv('SMTP_PASSWORD')); // Gmail App Password
+
 define('FROM_EMAIL', 'homeassist021@gmail.com');
 define('FROM_NAME', 'XKCD Updates');
+
