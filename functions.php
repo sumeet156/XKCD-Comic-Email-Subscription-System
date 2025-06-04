@@ -105,10 +105,11 @@ function fetchAndFormatXKCDData(): string {
     if ($response === false) throw new Exception("Could not fetch XKCD comic data.");
     $data = json_decode($response, true);
     if (!$data || !isset($data['img'], $data['title'], $data['alt'])) throw new Exception("Invalid XKCD comic data.");
+
     return "<h2>XKCD Comic</h2>
-            <img src=\"{$data['img']}\" alt=\"{$data['alt']}\">
-            <p><a href=\"https://xkcd-comic-app.onrender.com/unsubscribe.php\" id=\"unsubscribe-button\">Unsubscribe</a></p>";
+            <img src=\"{$data['img']}\" alt=\"{$data['alt']}\">";
 }
+
 
 function sendXKCDUpdatesToSubscribers(): bool {
     $file = __DIR__ . '/registered_emails.txt';
