@@ -49,7 +49,6 @@ function sendVerificationEmail(string $email, string $code): bool {
         $mail->Subject = 'Your Verification Code';
         $mail->Body = "<p>Your verification code is: <strong>{$code}</strong></p>";
         $mail->AltBody = "Your verification code is: {$code}";
-        $mail->SMTPDebug = 0; // Change to 2 if debugging
         return $mail->send();
     } catch (Exception $e) {
         error_log("PHPMailer Exception while sending to $email: " . $e->getMessage());
@@ -108,7 +107,7 @@ function fetchAndFormatXKCDData(): string {
     if (!$data || !isset($data['img'], $data['title'], $data['alt'])) throw new Exception("Invalid XKCD comic data.");
     return "<h2>XKCD Comic</h2>
             <img src=\"{$data['img']}\" alt=\"{$data['alt']}\">
-            <p><a href=\"http://localhost:8000/unsubscribe.php\" id=\"unsubscribe-button\">Unsubscribe</a></p>";
+            <p><a href=\"https://xkcd-comic-app.onrender.com/unsubscribe.php\" id=\"unsubscribe-button\">Unsubscribe</a></p>";
 }
 
 function sendXKCDUpdatesToSubscribers(): bool {
@@ -143,12 +142,8 @@ function sendXKCDUpdatesToSubscribers(): bool {
                 $mail->addAddress($email);
                 $mail->isHTML(true);
                 $mail->Subject = 'Your XKCD Comic';
-                $unsubscribeLink = "http://localhost:8000/unsubscribe.php?email=" . urlencode($email);
-                $mailBody = str_replace(
-                    'http://localhost:8000/unsubscribe.php',
-                    $unsubscribeLink,
-                    $comicHtml
-                );
+                $unsubscribeLink = "https://xkcd-comic-app.onrender.com/unsubscribe.php?email=" . urlencode($email);
+                $mailBody = $comicHtml . "<p><a href=\"$unsubscribeLink\" id=\"unsubscribe-button\">Unsubscribe</a></p>";
                 $mail->Body = $mailBody;
                 $mail->AltBody = "View today's XKCD comic. To unsubscribe, visit: " . $unsubscribeLink;
                 $mail->send();
